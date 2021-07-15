@@ -19,13 +19,10 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(target.position + new Vector3(0, 1, 0));
-        transform.Translate(Vector3.right * Time.deltaTime * 5);
-    }
-
-    void LateUpdate()
-    {
+        //transform.LookAt(target.position + new Vector3(0, 1, 0));
+        //transform.Translate(Vector3.right * Time.deltaTime * 5);
         Vector3 targetPosition = target.position + Offset;
         camTransform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, SmoothTime);
     }
+
 }
