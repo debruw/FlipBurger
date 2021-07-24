@@ -5,6 +5,7 @@ using BansheeGz.BGSpline.Components;
 using Obi;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using TapticPlugin;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,19 +21,25 @@ public class PlayerController : MonoBehaviour
     public GameObject Bun2;
     public Collector collector;
     public GameObject JumpEffect;
-    bool isStarted, isGameOver;
+    public Rigidbody[] ragdollRigidbodies;
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
         animator.SetBool("isTurning", true);
+        ragdollRigidbodies = animator.gameObject.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody item in ragdollRigidbodies)
+        {
+            item.useGravity = false;
+            item.isKinematic = true;
+            item.GetComponent<Collider>().enabled = false;
+        }
     }
 
     bool isButtonUp;
     float count = 1f;
     void Update()
     {
-        if (!isStarted || isGameOver)
+        if (!GameManager.Instance.isGameStarted || GameManager.Instance.isGameOver)
         {
             return;
         }
@@ -61,16 +68,7 @@ public class PlayerController : MonoBehaviour
             isButtonUp = true;
         }
 
-        if (isButtonUp && count > 0)
-        {
-            count -= Time.deltaTime;
-            ModelTransform.Rotate(20 * count * TurnSpeed * Time.deltaTime, 0, 0);
-        }
-        else
-        {
-            isButtonUp = false;
-            count = 1;
-        }
+        ModelTransform.Rotate(5 * TurnSpeed * Time.deltaTime, 0, 0);
 
         if (isButtonUp && cam1.fieldOfView > 60)
         {
@@ -79,44 +77,53 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public GameObject Restartbutton;
+    public void OpenRagdoll()
+    {
+        animator.enabled = false;
+        collector.ClearCollectings();
+        collector.gameObject.SetActive(false);
+        GetComponent<Collider>().enabled = false;
+        foreach (Rigidbody item in ragdollRigidbodies)
+        {
+            item.useGravity = true;
+            item.isKinematic = false;
+            item.AddForce(Vector3.forward * 500);
+            item.GetComponent<Collider>().enabled = true;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger");
         if (other.CompareTag("Trampoline"))
         {
-            //if (isButtonUp)
-            //{
-            other.GetComponent<Animator>().SetTrigger("Jump");
-            Instantiate(JumpEffect, new Vector3(other.transform.position.x, .75f, other.transform.position.z), Quaternion.identity);
-            collector.CloseAllSoftBodies();
-            animator.SetTrigger("CloseBun");
-            //}
-            //else
-            //{
-            //    //GameOver
-            //    Debug.Log("Game Over");
-            //    isGameOver = true;
-            //}
+            if (PlayerPrefs.GetInt("VIBRATION") == 1)
+                TapticManager.Impact(ImpactFeedback.Medium);
+            SoundManager.Instance.playSound(SoundManager.GameSounds.Jump);
+            if (isButtonUp)
+            {
+                other.GetComponent<Animator>().SetTrigger("Jump");
+                Instantiate(JumpEffect, new Vector3(other.transform.position.x, .75f, other.transform.position.z), Quaternion.identity);
+                collector.CloseAllSoftBodies();
+                animator.SetTrigger("CloseBun");                
+            }
+            else
+            {
+                //GameOver
+                Debug.Log("Game Over");
+                GameManager.Instance.isGameOver = true;
+                OpenRagdoll();
+                StartCoroutine(GameManager.Instance.WaitAndGameLose());
+            }
         }
         else if (other.CompareTag("FinishLine"))
         {
-            isStarted = false;
-            isGameOver = true;
+            GameManager.Instance.isGameStarted = false;
+            GameManager.Instance.isGameOver = true;
             ModelTransform.DORotate(Vector3.zero, 1);
             animator.SetBool("isTurning", false);
             animator.SetBool("isFinish", true);
-            Restartbutton.SetActive(true);
+            StartCoroutine(GameManager.Instance.WaitAndGameWin());
         }
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void SartGame()
-    {
-        isStarted = true;
-        animator.SetBool("isTurning", false);
     }
 }
