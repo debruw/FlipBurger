@@ -7,6 +7,7 @@ TagManager:
   - Collectable
   - Trampoline
   - FinishLine
+  - CloseBun
   layers:
   - Default
   - TransparentFX

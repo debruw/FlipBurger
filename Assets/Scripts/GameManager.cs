@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Button TapToStartButton;
     public Text LevelText, CountText;
     public GameObject PlayText, ContinueText;
+    public GameObject Tutorial1, Tutorial2;
     #endregion
 
     private void Awake()
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
             PlayText.SetActive(false);
         }
         currentLevel = PlayerPrefs.GetInt("LevelId");
-        LevelText.text = currentLevel.ToString();
+        LevelText.text = "LEVEL " + currentLevel.ToString();
         CountText.text = burgerCount.ToString();
     }
 
@@ -120,6 +121,10 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         TapToStartButton.gameObject.SetActive(false);
         playerController.animator.SetBool("isTurning", false);
+        if (currentLevel == 1)
+        {
+            Tutorial1.SetActive(true);
+        }
     }
 
     public int burgerCount;

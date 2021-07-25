@@ -61,11 +61,20 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isTurning", true);
             isButtonUp = false;
+            if (GameManager.Instance.currentLevel == 1 && GameManager.Instance.Tutorial1.activeSelf)
+            {
+                GameManager.Instance.Tutorial1.SetActive(false);
+                GameManager.Instance.Tutorial2.SetActive(true);
+            }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             animator.SetBool("isTurning", false);
             isButtonUp = true;
+            if (GameManager.Instance.currentLevel == 1)
+            {
+                GameManager.Instance.Tutorial2.SetActive(false);
+            }
         }
 
         ModelTransform.Rotate(5 * TurnSpeed * Time.deltaTime, 0, 0);
@@ -105,7 +114,7 @@ public class PlayerController : MonoBehaviour
                 other.GetComponent<Animator>().SetTrigger("Jump");
                 Instantiate(JumpEffect, new Vector3(other.transform.position.x, .75f, other.transform.position.z), Quaternion.identity);
                 collector.CloseAllSoftBodies();
-                animator.SetTrigger("CloseBun");                
+                animator.SetTrigger("CloseBun");
             }
             else
             {
@@ -124,6 +133,11 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isTurning", false);
             animator.SetBool("isFinish", true);
             StartCoroutine(GameManager.Instance.WaitAndGameWin());
+        }
+        else if (other.CompareTag("CloseBun"))
+        {
+            collector.CloseAllSoftBodies();
+            animator.SetTrigger("CloseBun");
         }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7752796950886848680}
   - component: {fileID: 3086390333706851112}
   - component: {fileID: 2943413228425860968}
+  - component: {fileID: 1564385834041837360}
   m_Layer: 0
   m_Name: ContinueText
   m_TagString: Untagged
@@ -94,6 +95,25 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!95 &1564385834041837360
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16480277293000802}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 975fd370c277f9c4588ac5af10e16a11, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &877645500507449561
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +314,7 @@ GameObject:
   - component: {fileID: 1150381582134335194}
   - component: {fileID: 1160559151411882755}
   - component: {fileID: 2925256866155216621}
+  - component: {fileID: 1628682252474573945}
   m_Layer: 0
   m_Name: PlayText
   m_TagString: Untagged
@@ -376,6 +397,25 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!95 &1628682252474573945
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496072033189561460}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 975fd370c277f9c4588ac5af10e16a11, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2161954483807529619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1030,10 +1070,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2161954484682826634}
   - component: {fileID: 2161954484682826632}
-  - component: {fileID: 2161954484682826639}
   - component: {fileID: 6730385773798334850}
   - component: {fileID: 9046314620705086418}
   - component: {fileID: 7580953549016706163}
+  - component: {fileID: 5621082118558563165}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1068,25 +1108,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2161954484682826635}
   m_CullTransparentMesh: 0
---- !u!95 &2161954484682826639
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161954484682826635}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6730385773798334850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,6 +1171,25 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.8}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!95 &5621082118558563165
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161954484682826635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 975fd370c277f9c4588ac5af10e16a11, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2161954484921830084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1373,10 +1413,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2161954485245122282}
   - component: {fileID: 2161954485245122280}
-  - component: {fileID: 2161954485245122287}
   - component: {fileID: 9126655652100804924}
   - component: {fileID: 5351349902171826650}
   - component: {fileID: 2778196792508712320}
+  - component: {fileID: 6075853150245202}
   m_Layer: 0
   m_Name: Text
   m_TagString: Untagged
@@ -1411,25 +1451,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2161954485245122283}
   m_CullTransparentMesh: 0
---- !u!95 &2161954485245122287
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161954485245122283}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &9126655652100804924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1493,6 +1514,25 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.8}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
+--- !u!95 &6075853150245202
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161954485245122283}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 975fd370c277f9c4588ac5af10e16a11, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2161954485563966537
 GameObject:
   m_ObjectHideFlags: 0

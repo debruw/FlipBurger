@@ -30,6 +30,7 @@ public class Collector : MonoBehaviour
             GameManager.Instance.AddBurger();
             Instantiate(PlusEffect, new Vector3(transform.position.x + 1f, transform.position.y + .5f, transform.position.z), Quaternion.identity);
             other.GetComponent<Collider>().enabled = false;
+            other.GetComponent<ObiSoftbody>().enabled = false;
             other.transform.parent = transform;
             lastPosition += new Vector3(0, 0, other.GetComponent<BoxCollider>().size.z);
             other.transform.localPosition = lastPosition;

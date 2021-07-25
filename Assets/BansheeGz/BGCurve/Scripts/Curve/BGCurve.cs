@@ -215,7 +215,8 @@ namespace BansheeGz.BGSpline.Curve
         private Mode2DEnum mode2D = Mode2DEnum.Off;
 
         //if curve is closed (e.g. if last and first point are connected)
-        [Tooltip("If curve is closed")] [SerializeField]
+        [Tooltip("If curve is closed")]
+        [SerializeField]
         private bool closed;
 
 
@@ -242,31 +243,39 @@ namespace BansheeGz.BGSpline.Curve
         private SnapTypeEnum snapType = SnapTypeEnum.Off;
 
         //snapping axis
-        [Tooltip("Axis for snapping points")] [SerializeField]
+        [Tooltip("Axis for snapping points")]
+        [SerializeField]
         private SnapAxisEnum snapAxis = SnapAxisEnum.Y;
 
         //snapping distance
-        [Tooltip("Snapping distance.")] [SerializeField] [Range(MinSnapDistance, MaxSnapDistance)]
+        [Tooltip("Snapping distance.")]
+        [SerializeField]
+        [Range(MinSnapDistance, MaxSnapDistance)]
         private float snapDistance = 10;
 
         //snapping layer mask
-        [Tooltip("Layer mask for snapping")] [SerializeField]
+        [Tooltip("Layer mask for snapping")]
+        [SerializeField]
         private LayerMask snapLayerMask = -1;
 
         //should snapping take triggers into account
-        [Tooltip("Should snapping takes triggers into account")] [SerializeField]
+        [Tooltip("Should snapping takes triggers into account")]
+        [SerializeField]
         private QueryTriggerInteraction snapTriggerInteraction = QueryTriggerInteraction.UseGlobal;
 
         //should snapping take triggers into account
-        [Tooltip("Should snapping takes backfaces of colliders into account")] [SerializeField]
+        [Tooltip("Should snapping takes backfaces of colliders into account")]
+        [SerializeField]
         private bool snapToBackFaces;
 
         //should curve monitor surrounding environment
-        [Tooltip("Should curve monitor surrounding environment every frame. This is super costly in terms of performance (especially for Curve snap mode)")] [SerializeField]
+        [Tooltip("Should curve monitor surrounding environment every frame. This is super costly in terms of performance (especially for Curve snap mode)")]
+        [SerializeField]
         private bool snapMonitoring;
 
         //events mode
-        [Tooltip("Event mode for runtime")] [SerializeField]
+        [Tooltip("Event mode for runtime")]
+        [SerializeField]
         private EventModeEnum eventMode = EventModeEnum.Update;
 
         //points mode
@@ -279,7 +288,8 @@ namespace BansheeGz.BGSpline.Curve
             PointsModeEnum.Inlined;
 
         //force firing Update event 
-        [Tooltip("Force firing of Changed event. This can be useful if you use Unity's Animation. Do not use it unless you really need it.")] [SerializeField]
+        [Tooltip("Force firing of Changed event. This can be useful if you use Unity's Animation. Do not use it unless you really need it.")]
+        [SerializeField]
         private ForceChangedEventModeEnum
             forceChangedEventMode;
 
@@ -785,14 +795,14 @@ namespace BansheeGz.BGSpline.Curve
                 switch (pointsMode)
                 {
                     case PointsModeEnum.Inlined:
-                        points[i] = (BGCurvePoint) value;
+                        points[i] = (BGCurvePoint)value;
                         break;
                     case PointsModeEnum.Components:
-                        pointsComponents[i] = (BGCurvePointComponent) value;
+                        pointsComponents[i] = (BGCurvePointComponent)value;
                         break;
                     case PointsModeEnum.GameObjectsNoTransform:
                     case PointsModeEnum.GameObjectsTransform:
-                        pointsGameObjects[i] = (BGCurvePointGO) value;
+                        pointsGameObjects[i] = (BGCurvePointGO)value;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException("pointsMode");
@@ -831,7 +841,7 @@ namespace BansheeGz.BGSpline.Curve
             return null;
         }
 
-        
+
         /// <summary>is curve has a field with provided name</summary>
         public bool HasField(string name)
         {
@@ -1085,7 +1095,7 @@ namespace BansheeGz.BGSpline.Curve
                     lastEventMessage = change.Message;
                 }
 
-                if (UseEventsArgs && !ChangeList.Contains(change)) ChangeList.Add((BGCurveChangedArgs) change.Clone());
+                if (UseEventsArgs && !ChangeList.Contains(change)) ChangeList.Add((BGCurveChangedArgs)change.Clone());
                 return;
             }
 
@@ -1280,14 +1290,14 @@ namespace BansheeGz.BGSpline.Curve
                     break;
 
                 case PointsModeEnum.Components:
-                    var pointComponent = (BGCurvePointComponent) Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
+                    var pointComponent = (BGCurvePointComponent)Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
                     pointsComponents = Insert(pointsComponents, index, pointComponent);
                     result = pointComponent;
                     break;
 
                 case PointsModeEnum.GameObjectsNoTransform:
                 case PointsModeEnum.GameObjectsTransform:
-                    var pointGameObject = (BGCurvePointGO) Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
+                    var pointGameObject = (BGCurvePointGO)Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
                     pointsGameObjects = Insert(pointsGameObjects, index, pointGameObject);
 
                     SetPointsNames();
@@ -1320,14 +1330,14 @@ namespace BansheeGz.BGSpline.Curve
             switch (pointsMode)
             {
                 case PointsModeEnum.Inlined:
-                    fieldValues = ((BGCurvePoint) point).PrivateValuesForFields;
+                    fieldValues = ((BGCurvePoint)point).PrivateValuesForFields;
                     break;
                 case PointsModeEnum.Components:
-                    fieldValues = ((BGCurvePointComponent) point).Point.PrivateValuesForFields;
+                    fieldValues = ((BGCurvePointComponent)point).Point.PrivateValuesForFields;
                     break;
                 case PointsModeEnum.GameObjectsNoTransform:
                 case PointsModeEnum.GameObjectsTransform:
-                    fieldValues = ((BGCurvePointGO) point).PrivateValuesForFields;
+                    fieldValues = ((BGCurvePointGO)point).PrivateValuesForFields;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("pointsMode");
@@ -1342,14 +1352,14 @@ namespace BansheeGz.BGSpline.Curve
             switch (pointsMode)
             {
                 case PointsModeEnum.Inlined:
-                    ((BGCurvePoint) point).PrivateValuesForFields = fieldsValues;
+                    ((BGCurvePoint)point).PrivateValuesForFields = fieldsValues;
                     break;
                 case PointsModeEnum.Components:
-                    ((BGCurvePointComponent) point).Point.PrivateValuesForFields = fieldsValues;
+                    ((BGCurvePointComponent)point).Point.PrivateValuesForFields = fieldsValues;
                     break;
                 case PointsModeEnum.GameObjectsNoTransform:
                 case PointsModeEnum.GameObjectsTransform:
-                    ((BGCurvePointGO) point).PrivateValuesForFields = fieldsValues;
+                    ((BGCurvePointGO)point).PrivateValuesForFields = fieldsValues;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("pointsMode");
@@ -1398,7 +1408,7 @@ namespace BansheeGz.BGSpline.Curve
                     {
                         var point = points[i];
                         hasPointTransform = hasPointTransform || point.PointTransform != null;
-                        toAdd[i] = (BGCurvePointComponent) Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
+                        toAdd[i] = (BGCurvePointComponent)Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
                     }
 
                     pointsComponents = Insert(pointsComponents, index, toAdd);
@@ -1413,7 +1423,7 @@ namespace BansheeGz.BGSpline.Curve
                     {
                         var point = points[i];
                         hasPointTransform = hasPointTransform || point.PointTransform != null;
-                        pointsToAdd[i] = (BGCurvePointGO) Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
+                        pointsToAdd[i] = (BGCurvePointGO)Convert(point, PointsModeEnum.Inlined, pointsMode, provider);
                     }
 
                     pointsGameObjects = Insert(pointsGameObjects, index, pointsToAdd);
@@ -1557,11 +1567,11 @@ namespace BansheeGz.BGSpline.Curve
                         switch (pointsMode)
                         {
                             case PointsModeEnum.Components:
-                                DestroyIt((Object) toDelete);
+                                DestroyIt((Object)toDelete);
                                 break;
                             case PointsModeEnum.GameObjectsNoTransform:
                             case PointsModeEnum.GameObjectsTransform:
-                                DestroyIt(((BGCurvePointGO) toDelete).gameObject);
+                                DestroyIt(((BGCurvePointGO)toDelete).gameObject);
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException("pointsMode");
@@ -1599,33 +1609,33 @@ namespace BansheeGz.BGSpline.Curve
                         switch (pointsMode)
                         {
                             case PointsModeEnum.Components:
-                            {
-                                // to components
-                                var toAdd = new BGCurvePointComponent[points.Length];
-                                for (var i = 0; i < points.Length; i++) toAdd[i] = (BGCurvePointComponent) Convert(points[i], oldMode, pointsMode, provider);
+                                {
+                                    // to components
+                                    var toAdd = new BGCurvePointComponent[points.Length];
+                                    for (var i = 0; i < points.Length; i++) toAdd[i] = (BGCurvePointComponent)Convert(points[i], oldMode, pointsMode, provider);
 
-                                this.pointsMode = pointsMode;
-                                pointsComponents = Insert(pointsComponents, 0, toAdd);
+                                    this.pointsMode = pointsMode;
+                                    pointsComponents = Insert(pointsComponents, 0, toAdd);
 
-                                //no need to process fields, cause the same point is reused
-                            }
+                                    //no need to process fields, cause the same point is reused
+                                }
                                 break;
                             case PointsModeEnum.GameObjectsNoTransform:
                             case PointsModeEnum.GameObjectsTransform:
-                            {
-                                // to gameobjects
-                                var toAdd = new BGCurvePointGO[points.Length];
+                                {
+                                    // to gameobjects
+                                    var toAdd = new BGCurvePointGO[points.Length];
 
-                                for (var i = 0; i < points.Length; i++) toAdd[i] = (BGCurvePointGO) Convert(points[i], oldMode, pointsMode, provider);
+                                    for (var i = 0; i < points.Length; i++) toAdd[i] = (BGCurvePointGO)Convert(points[i], oldMode, pointsMode, provider);
 
-                                this.pointsMode = pointsMode;
-                                pointsGameObjects = Insert(pointsGameObjects, 0, toAdd);
+                                    this.pointsMode = pointsMode;
+                                    pointsGameObjects = Insert(pointsGameObjects, 0, toAdd);
 
-                                SetPointsNames();
+                                    SetPointsNames();
 
-                                //fields
-                                if (FieldsCount > 0) AddFields(pointsMode, toAdd);
-                            }
+                                    //fields
+                                    if (FieldsCount > 0) AddFields(pointsMode, toAdd);
+                                }
                                 break;
                         }
 
@@ -1651,7 +1661,7 @@ namespace BansheeGz.BGSpline.Curve
                                 case PointsModeEnum.Inlined:
                                     var pointsToAdd = new BGCurvePoint[pointsComponents.Length];
 
-                                    for (var i = 0; i < pointsComponents.Length; i++) pointsToAdd[i] = (BGCurvePoint) Convert(pointsComponents[i], oldMode, pointsMode, provider);
+                                    for (var i = 0; i < pointsComponents.Length; i++) pointsToAdd[i] = (BGCurvePoint)Convert(pointsComponents[i], oldMode, pointsMode, provider);
 
                                     points = Insert(points, 0, pointsToAdd);
 
@@ -1661,7 +1671,7 @@ namespace BansheeGz.BGSpline.Curve
                                 case PointsModeEnum.GameObjectsTransform:
                                     var toAdd = new BGCurvePointGO[pointsComponents.Length];
 
-                                    for (var i = 0; i < pointsComponents.Length; i++) toAdd[i] = (BGCurvePointGO) Convert(pointsComponents[i], oldMode, pointsMode, provider);
+                                    for (var i = 0; i < pointsComponents.Length; i++) toAdd[i] = (BGCurvePointGO)Convert(pointsComponents[i], oldMode, pointsMode, provider);
 
                                     pointsGameObjects = Insert(pointsGameObjects, 0, toAdd);
 
@@ -1686,7 +1696,7 @@ namespace BansheeGz.BGSpline.Curve
 
                                     var pointsToAdd = new BGCurvePoint[pointsGameObjects.Length];
 
-                                    for (var i = 0; i < pointsGameObjects.Length; i++) pointsToAdd[i] = (BGCurvePoint) Convert(pointsGameObjects[i], oldMode, pointsMode, provider);
+                                    for (var i = 0; i < pointsGameObjects.Length; i++) pointsToAdd[i] = (BGCurvePoint)Convert(pointsGameObjects[i], oldMode, pointsMode, provider);
 
                                     points = Insert(points, 0, pointsToAdd);
 
@@ -1697,7 +1707,7 @@ namespace BansheeGz.BGSpline.Curve
 
                                     var toAdd = new BGCurvePointComponent[pointsGameObjects.Length];
 
-                                    for (var i = 0; i < pointsGameObjects.Length; i++) toAdd[i] = (BGCurvePointComponent) Convert(pointsGameObjects[i], oldMode, pointsMode, provider);
+                                    for (var i = 0; i < pointsGameObjects.Length; i++) toAdd[i] = (BGCurvePointComponent)Convert(pointsGameObjects[i], oldMode, pointsMode, provider);
 
                                     pointsComponents = Insert(pointsComponents, 0, toAdd);
 
@@ -1726,7 +1736,7 @@ namespace BansheeGz.BGSpline.Curve
                                 var pointComponent = toRemove[i];
 
                                 if (destroyer != null) destroyer(pointComponent);
-                                else DestroyIt(useComponents ? (Object) pointComponent : ((BGCurvePointGO) pointComponent).gameObject);
+                                else DestroyIt(useComponents ? (Object)pointComponent : ((BGCurvePointGO)pointComponent).gameObject);
                             }
                         }
                     }
@@ -1754,14 +1764,14 @@ namespace BansheeGz.BGSpline.Curve
 
                             //---------- To components
 
-                            result = provider == null ? point.Curve.gameObject.AddComponent<BGCurvePointComponent>() : (BGCurvePointComponent) provider();
-                            ((BGCurvePointComponent) result).PrivateInit((BGCurvePoint) point);
+                            result = provider == null ? point.Curve.gameObject.AddComponent<BGCurvePointComponent>() : (BGCurvePointComponent)provider();
+                            ((BGCurvePointComponent)result).PrivateInit((BGCurvePoint)point);
                             break;
                         case PointsModeEnum.GameObjectsNoTransform:
                         case PointsModeEnum.GameObjectsTransform:
 
                             //---------- To GO
-                            result = ConvertInlineToGo((BGCurvePoint) point, to, provider);
+                            result = ConvertInlineToGo((BGCurvePoint)point, to, provider);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException("to", to, null);
@@ -1776,13 +1786,13 @@ namespace BansheeGz.BGSpline.Curve
 
                             //---------- To inline
 
-                            result = ((BGCurvePointComponent) point).Point;
+                            result = ((BGCurvePointComponent)point).Point;
                             break;
                         case PointsModeEnum.GameObjectsNoTransform:
                         case PointsModeEnum.GameObjectsTransform:
 
                             //---------- To GO
-                            result = ConvertInlineToGo(((BGCurvePointComponent) point).Point, to, provider);
+                            result = ConvertInlineToGo(((BGCurvePointComponent)point).Point, to, provider);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException("to", to, null);
@@ -1799,19 +1809,19 @@ namespace BansheeGz.BGSpline.Curve
 
                             //---------- To inline
 
-                            result = ConvertGoToInline((BGCurvePointGO) point, from);
+                            result = ConvertGoToInline((BGCurvePointGO)point, from);
                             break;
 
                         case PointsModeEnum.Components:
 
                             //---------- To Component
 
-                            result = provider != null ? (BGCurvePointComponent) provider() : point.Curve.gameObject.AddComponent<BGCurvePointComponent>();
-                            ((BGCurvePointComponent) result).PrivateInit(ConvertGoToInline((BGCurvePointGO) point, from));
+                            result = provider != null ? (BGCurvePointComponent)provider() : point.Curve.gameObject.AddComponent<BGCurvePointComponent>();
+                            ((BGCurvePointComponent)result).PrivateInit(ConvertGoToInline((BGCurvePointGO)point, from));
                             break;
                         case PointsModeEnum.GameObjectsNoTransform:
                         case PointsModeEnum.GameObjectsTransform:
-                            ((BGCurvePointGO) point).PrivateInit(null, to);
+                            ((BGCurvePointGO)point).PrivateInit(null, to);
                             result = point;
                             break;
                         default:
@@ -1851,7 +1861,7 @@ namespace BansheeGz.BGSpline.Curve
         private static BGCurvePointGO ConvertInlineToGo(BGCurvePoint point, PointsModeEnum to, Func<BGCurvePointI> provider)
         {
             BGCurvePointGO pointGO;
-            if (provider != null) pointGO = (BGCurvePointGO) provider();
+            if (provider != null) pointGO = (BGCurvePointGO)provider();
             else
             {
                 var gameObjectForPoint = new GameObject();
@@ -1911,7 +1921,7 @@ namespace BansheeGz.BGSpline.Curve
             //check additionally for point's changes
             if (pointsMode == PointsModeEnum.GameObjectsTransform)
             {
-                var points = (BGCurvePointGO[]) Points;
+                var points = (BGCurvePointGO[])Points;
                 var length = points.Length;
                 for (var i = 0; i < length; i++)
                 {
